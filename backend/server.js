@@ -49,6 +49,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const JWT_SECRET = process.env.JWT_SECRET || 'ecofriend_super_secret_2024';
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+const MODEL = process.env.AI_MODEL || 'google/gemma-4-31b-it:free';
 
 app.use(cors());
 app.use(express.json());
@@ -254,7 +255,7 @@ app.post('/api/chat', authenticateToken, async (req, res) => {
     res.setHeader('Connection', 'keep-alive');
 
     const requestData = JSON.stringify({
-      model: 'google/gemini-2.0-flash-lite-001',
+      model: MODEL,
       messages: messagesForAI,
       stream: true
     });
